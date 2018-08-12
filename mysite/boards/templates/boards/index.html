@@ -2,31 +2,35 @@
 
 {% block title %}Home{% endblock %}
 
-{% block content %}
-<h1>Boards</h1>
-<table border="1">
-  <thead>
-    <tr>
-      <th>Board</th>
-      <th>Posts</th>
-      <th>Topics</th>
-      <th>Last Post</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for board in boards %}
+{% block body %}
+<div class="container">
+  <ol class="breadcrumb my-4">
+    <li class="breadcrumb-item active">Boards</li>
+  </ol>
+  <table border="1" class="table">
+    <thead class="thead-inverse">
       <tr>
-        <td>
-          {{ board.name }}<br>
-          <small style="color: #888">{{ board.description }}</small>
-        </td>
-        <td>0</td>
-        <td>0</td>
-        <td></td>
+        <th>Board</th>
+        <th>Posts</th>
+        <th>Topics</th>
+        <th>Last Post</th>
       </tr>
-    {% endfor %}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {% for board in boards %}
+        <tr>
+          <td>
+            <a href="{% url 'boards:board_topics' board.pk %}">{{ board.name }}</a>
+            <small class="text-muted d-block">{{ board.description }}</small>
+          </td>
+          <td class="align-middle">0</td>
+          <td class="align-middle">0</td>
+          <td></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}
 <!-- {% load static %}<!DOCTYPE html>
 <html>
