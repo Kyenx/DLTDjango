@@ -1,12 +1,12 @@
-{% extends 'boards/base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}Home{% endblock %}
 
+{% block navbar %}
+  <li class="breadcrumb-item active">Boards</li>
+{% endblock navbar %}
+
 {% block body %}
-<div class="container">
-  <ol class="breadcrumb my-4">
-    <li class="breadcrumb-item active">Boards</li>
-  </ol>
   <table border="1" class="table">
     <thead class="thead-inverse">
       <tr>
@@ -23,14 +23,13 @@
             <a href="{% url 'boards:board_topics' board.pk %}">{{ board.name }}</a>
             <small class="text-muted d-block">{{ board.description }}</small>
           </td>
-          <td class="align-middle">0</td>
-          <td class="align-middle">0</td>
+          <td class="align-middle">{{board.topics.all.count}}</td>
+          <td class="align-middle">{{board.topics.all.count}}</td>
           <td></td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
-</div>
 {% endblock %}
 <!-- {% load static %}<!DOCTYPE html>
 <html>

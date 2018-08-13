@@ -18,5 +18,6 @@ from django.urls import include, path
 
 urlpatterns = [
     path('', include('boards.urls')), #The include() function allows referencing other URLconfs
+    path('auth/', include('accounts.urls')),
     path('admin/', admin.site.urls),
 ]

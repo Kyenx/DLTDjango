@@ -6,6 +6,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #Project Path
 #PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 BOARDS_DIR = os.path.join(BASE_DIR, 'boards')
+ACCOUNTS_DIR = os.path.join(BASE_DIR, 'accounts')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -32,6 +33,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'widget_tweaks',
+
+    'accounts',
     'boards',
 ]
 
@@ -51,7 +55,9 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BOARDS_DIR, 'templates')
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BOARDS_DIR, 'templates'),
+            os.path.join(ACCOUNTS_DIR, 'templates'),
             ],
         'APP_DIRS': True,
         'OPTIONS': {
