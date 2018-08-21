@@ -8,7 +8,7 @@ from boards.models import CustomUser
 class SignUpViewTests(TestCase):
     
     def setUp(self):
-        self.url = reverse("accounts:sign_up")
+        self.url = reverse("sign_up")
         self.response = self.client.get(self.url)
 
     def test_sign_up_view_success_code(self):
@@ -50,7 +50,7 @@ class SuccessSignUpTests(TestCase):
             'password1':"qwertt1234",
             'password2':"qwertt1234"           
         }
-        self.url = reverse("accounts:sign_up")
+        self.url = reverse("sign_up")
         self.response = self.client.post(self.url, data)
     
     def test_sign_up_valid_user_creation_to_redirection(self):

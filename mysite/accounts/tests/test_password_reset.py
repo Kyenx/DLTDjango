@@ -8,7 +8,7 @@ from django.test import TestCase
 
 class PasswordResetTests(TestCase):
     def setUp(self):
-        url = reverse('accounts:password_reset')
+        url = reverse('password_reset')
         self.response = self.client.get(url)
 
     def test_status_code(self):
@@ -37,14 +37,14 @@ class SuccessfulPasswordResetTests(TestCase):
     def setUp(self):
         email = 'john@doe.com'
         CustomUser.objects.create_user(username='john', email=email, password='123abcdef')
-        url = reverse('accounts:password_reset')
+        url = reverse('password_reset')
         self.response = self.client.post(url, {'email': email})
 
     def test_redirection(self):
         '''
         A valid form submission should redirect the user to `password_reset_done` view
         '''
-        url = reverse('accounts:password_reset_done')
+        url = reverse('password_reset_done')
         self.assertRedirects(self.response, url)
 
 #     def test_send_password_reset_email(self):
