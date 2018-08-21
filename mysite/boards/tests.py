@@ -13,7 +13,7 @@ class IndexViewTests(TestCase):
         url = reverse('boards:index')
         self.response = self.client.get(url)
 
-    def test_index_view_status_code(self):
+    def test_index_view_success_status_code(self):
         #url = reverse('boards:index')
         #response = self.client.get(url)
         self.assertEquals(self.response.status_code, 200)

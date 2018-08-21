@@ -22,6 +22,13 @@ ALLOWED_HOSTS = []
 #Custom User Model
 AUTH_USER_MODEL = 'boards.CustomUser'
 
+#Login redirect
+LOGIN_REDIRECT_URL = 'boards:index'
+
+LOGIN_URL = 'login'
+
+#Logout redirect
+LOGOUT_REDIRECT_URL = 'sign_up'
 
 # Application definition
 
@@ -67,6 +74,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries':{
+                'form_tags': 'mysite.templatetags.form_tags',
+
+            },
         },
     },
 ]

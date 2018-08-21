@@ -1,0 +1,34 @@
+{% load form_tags widget_tweaks %}
+
+{% if form.non_field_errors %}
+  <div class="alert alert-danger" role="alert">
+    {% for error in form.non_field_errors %}
+      <p {% if forloop.last %} class="mb-0"{% endif %}>{{ error }}</p>
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% for field in form %}
+          <div class="form-group">
+            {{ field.label_tag }}
+            
+            {% comment %} {% if form.is_bound %}  {% endcomment %}
+             {% comment %} when form has no data it is not bound {% endcomment %}
+             {{ field.subject }}
+              {% render_field field class=field|input_class %}
+              {% if field.errors %}
+                {% comment %} check validity frontend first {% endcomment %}
+                {% for error in field.errors %}
+                  <div class="invalid-feedback">
+                    {{ error }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+              {% if field.help_text %}
+                <small class="form-text text-muted">
+                  {{ field.help_text|safe }}
+                </small>
+              {% endif %}
+            {% comment %} {% endif %} {% endcomment %}
+          </div>
+{% endfor %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 #from django.http import HttpResponse
+from  django.contrib.auth.decorators import login_required
 from .models import Board, Topic, Post, CustomUser
 from .forms import NewTopicForm
 
@@ -13,6 +14,7 @@ def board_topics(request, pk):
     board = get_object_or_404(Board, pk=pk) #Board.objects.get(pk=pk)
     return render(request, 'topics.html', {'board': board})
 
+@login_required
 def new_topic(request, pk):
     board = get_object_or_404(Board, pk=pk)
 
@@ -42,13 +44,13 @@ def new_topic(request, pk):
         if form.is_valid(): #check validity 
             topic = form.save(commit=False) #false commit = doesnt save until save called again
             topic.board = board
-            topic.starter = user
+            topic.starter = request.user
             topic.save() #save
 
             post = Post.objects.create(  #Use regular objects.create method for models outs formAPI class
             message=form.cleaned_data.get('message'),
             topic=topic,
-            created_by=user
+            created_by=request.user
             )
 
             return redirect('boards:board_topics', pk=board.pk)  # TODO: redirect to the created topic page, prevents double submitting
@@ -56,3 +58,7 @@ def new_topic(request, pk):
     else:
         form = NewTopicForm()
     return render(request, 'new_topic.html', {'board': board, 'form':form}) #if fail - return view django form error generated messages 
+
+def topic_posts(request, pk, topic_pk):
+    topic = get_object_or_404(Topic, board__pk=pk, pk=topic_pk)
+    return render(request, 'topic_posts.html', {'topic': topic})
