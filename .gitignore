@@ -20,3 +20,14 @@ node_modules/
 
 # Optional eslint cache
 .eslintcache
+
+#Python folders
+__pycache__/
+*.py[cod]
+.env
+venv/
+
+
+# SQLite database files
+
+*.sqlite3
